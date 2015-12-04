@@ -36,3 +36,34 @@ Instead, this plugin defines traits that you can `use` in your own theme or plug
 ## Why Traits?
 
 Traits have been around since PHP 5.4 (and OO PHP has been around even longer!), but WordPress development seldom takes advantage of this, typically favoring the imperative programming style. This can lead to all sorts of headaches, but the one I've found the most pervasive and the most counter-productive is the lack of reusability.
+
+## TODO
+
+1. Implement core functionality
+2. Bootstrap testing workflow (PHPUnit, WP_UnitTestCase, QUnit/Jasmine/Karma?)
+3. Implement fields:
+	* text/textarea
+	* number
+	* email
+	* url
+	* password
+	* wysiwyg
+	* image (with crop option)
+	* file
+	* gallery
+	* select
+	* checkbox
+	* radio
+	* link picker
+	* post
+	* taxonomy
+	* user
+	* map
+	* date/time pickers
+	* color picker
+4. Implement other goodies:
+	* message
+	* tabs
+	* repeater
+
+
