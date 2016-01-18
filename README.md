@@ -37,6 +37,33 @@ Instead, this plugin defines traits that you can `use` in your own theme or plug
 
 Traits have been around since PHP 5.4 (and OO PHP has been around even longer!), but WordPress development seldom takes advantage of this, typically favoring the imperative programming style. This can lead to all sorts of headaches, but the one I've found the most pervasive and the most counter-productive is the lack of reusability.
 
+## Contributing
+
+First install the repo and dev dependencies:
+
+```
+$ git clone wp-custom-field-traits
+$ cd wp-custom-field-traits
+$ npm install
+$ grunt install
+```
+
+This will prompt you for your local root MySQL password create a new database and user (see Gruntfile). Using some (really insecure) credentials it will install WordPress for you and finally start a server at localhost:8000.
+
+This ought to go without saying, but...
+
+#### DO NOT use this process to install WordPress on a public-facing server!
+
+### Advanced Installation
+
+The `grunt install` task is really just a very thin wrapper around a couple `mysql` and `wp-cli` commands. If you want a custom WP installation for your own dev workflow, just create a MySQL database and WP installation as you normally would. For convenience, `grunt composer` will create a `vendor/bin/wp` script for you so you can do stuff like this to install WordPress:
+
+```
+$ cd wordpress
+$ ../vendor/bin/wp core config --prompt
+$ ../vendor/bin/wp core install --prompt
+```
+
 ## TODO
 
 1. Implement core functionality

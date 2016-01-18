@@ -1,0 +1,19 @@
+{
+    "name": "acobster/wp-custom-field-traits",
+    "description": "A unique OO approach to custom WordPress fields",
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "johnpbloch/wordpress": "~4.4",
+        "idct/composer-custom-directory": "dev-master",
+        "wp-cli/wp-cli": "~0.22"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "The Ambassador of Funk",
+            "email": "acobster@gmail.com"
+        }
+    ]
+}
