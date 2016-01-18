@@ -23,6 +23,16 @@ module.exports = function(grunt) {
       wp_install: {
         cwd: 'wordpress',
         cmd: '../vendor/bin/wp core install --url=localhost:8000 --title="WP Custom Traits" --admin_user=traits --admin_password=password --admin_email=me@example.com --skip-email'
+      },
+      wp_plugin_activate: {
+        cwd: 'wordpress',
+        cmd: '../vendor/bin/wp plugin activate wp-custom-field-traits'
+      }
+    },
+    symlink: {
+      plugin: {
+        src: '.',
+        dest: 'wordpress/wp-content/plugins/wp-custom-field-traits'
       }
     },
     watch: {
@@ -42,7 +52,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-composer');
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-php');
+  grunt.loadNpmTasks('grunt-contrib-symlink');
 
   // Install dev dependencies
-  grunt.registerTask('install', ['composer:install', 'exec:mysql', 'exec:wp_config', 'exec:wp_install', 'php']);
+  grunt.registerTask('install', [
+    'composer:install',
+    'exec:mysql',
+    'exec:wp_config',
+    'exec:wp_install',
+    'symlink:plugin',
+    'exec:wp_plugin_activate',
+    'php'
+  ]);
 };
