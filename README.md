@@ -66,10 +66,12 @@ $ ../vendor/bin/wp core install --prompt
 
 ## TODO
 
-1. Implement core functionality
+#### Currently this only supports basic text fields, with no configuration.
+
 2. Bootstrap testing workflow (PHPUnit, WP_UnitTestCase, QUnit/Jasmine/Karma?)
+3. Implement text field configurations
 3. Implement fields:
-	* text/textarea
+	* textarea
 	* number
 	* email
 	* url
