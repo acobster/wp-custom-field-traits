@@ -2,7 +2,7 @@
 
 namespace Cft\Field;
 
-use Cft\View\DustView;
+use Cft\Plugin;
 
 class Text extends AbstractBase {
   public function getValue() {
@@ -10,9 +10,10 @@ class Text extends AbstractBase {
   }
 
   public function getMetaBox() {
-    $template = new DustView();
-    return $template->render(
-      CFT_PLUGIN_DIR . 'views/input.dust',
+    $view = Plugin::getInstance()->get('view');
+
+    return $view->render(
+      'input.dust',
       [
         'name' => $this->getName(),
         'value' => $this->getValue(),
