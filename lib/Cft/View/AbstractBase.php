@@ -27,13 +27,6 @@ abstract class AbstractBase {
    */
   abstract public function compile( $template, $data );
 
-  /**
-   * Should return an instance of the template class used internally,
-   * such as \Dust\Dust
-   * @return  object an internal template instance
-   */
-  abstract public function getInternalTemplate();
-
   protected function getViewPath( $file ) {
     $dirs = Plugin::getInstance()->get('viewDirs');
 
