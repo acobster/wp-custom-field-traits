@@ -35,6 +35,21 @@ module.exports = function(grunt) {
         dest: 'wordpress/wp-content/plugins/wp-custom-field-traits'
       }
     },
+
+    /*
+     * We *only* want the src libs for the Dust library.
+     * Composer custom directories are not fine-grained enough for this,
+     * so use grunt-contrib-copy
+     */
+    copy: {
+      dust_php: {
+        nonull: true,
+        expand: true,
+        cwd: 'vendor/dust-php/dust-php/src/',
+        src: 'Dust/**',
+        dest: 'lib/'
+      }
+    },
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -53,10 +68,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-exec');
   grunt.loadNpmTasks('grunt-php');
   grunt.loadNpmTasks('grunt-contrib-symlink');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Install dev dependencies
   grunt.registerTask('install', [
     'composer:install',
+    'copy',
     'exec:mysql',
     'exec:wp_config',
     'exec:wp_install',

@@ -2,7 +2,8 @@
     "name": "acobster/wp-custom-field-traits",
     "description": "A unique OO approach to custom WordPress fields",
     "require": {
-        "php": ">=5.5"
+        "php": ">=5.5",
+        "dust-php/dust-php": "0.1.*"
     },
     "require-dev": {
         "johnpbloch/wordpress": "~4.4",
