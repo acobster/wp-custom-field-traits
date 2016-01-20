@@ -17,6 +17,7 @@ class Post {
     return [
       'bar' => 'text',
       'baz' => 'text',
+      'qux' => 'textarea',
     ];
   }
 }
