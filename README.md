@@ -14,14 +14,16 @@ If these terms scare you, you are probably barking up the wrong tree. :) On the 
 
 ```
 class MyPost {
-  use \Cft\HasCustomFields;
+  use \Cft\HasTextField;
   
-  protected static $cft_fields = [
-    'my_field' => [] // defaults to an optional text field
-  ];
+  public getFieldConfigs(
+    return [
+      'my_field' => 'text' // defaults to an optional text field
+    ];
+  );
 }
 
-MyPost::register_custom_fields();
+MyPost::hasCustomFields();
 ```
 
 ## Code-centric
