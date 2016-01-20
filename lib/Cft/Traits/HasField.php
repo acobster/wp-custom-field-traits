@@ -1,6 +1,6 @@
 <?php
 
-namespace Cft;
+namespace Cft\Traits;
 
 use Cft\Field\Factory;
 

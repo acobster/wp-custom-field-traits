@@ -3,8 +3,8 @@
 namespace Cft\Example;
 
 class MagicPost {
-  use \Cft\HasTextField { getFieldConfigs as protected; }
-  use \Cft\HasMagicField;
+  use \Cft\Traits\HasTextField { getFieldConfigs as protected; }
+  use \Cft\Traits\HasMagicField;
 
   protected $postId;
 

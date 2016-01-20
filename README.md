@@ -37,6 +37,68 @@ Instead, this plugin defines traits that you can `use` in your own theme or plug
 
 Traits have been around since PHP 5.4 (and OO PHP has been around even longer!), but WordPress development seldom takes advantage of this, typically favoring the imperative programming style. This can lead to all sorts of headaches, but the one I've found the most pervasive and the most counter-productive is the lack of reusability.
 
+Say you've got a simple custom post type, `robot`. Each robot has a name, a standard greeting, and a disposition (for example, "homicidal"), and you want these to be driven by custom meta boxes. If you're in standard procedural WordPress land, you'll probably declare all this straight in your functions.php:
+
+```
+register_post_type('robot', ['label' => 'Robots', ...]);
+
+add_action('add_meta_boxes', function() {
+  wp_nonce_field('save_robot', 'robot_nonce');
+  add_meta_box(
+    'robot-meta',
+    __("This Robot's Characteristics"),
+    'render_robot_meta_boxes',
+    'robot'
+  );
+});
+
+add_action('save_post_robot', function($id) {
+  if( ! wp_verify_nonce($_POST['save_robot'], 'save_robot') ) return;
+
+  save_post_meta($id, 'name', $_POST['robot_name']);
+  save_post_meta($id, 'greeting', $_POST['robot_greeting']);
+  save_post_meta($id, 'disposition', $_POST['robot_disposition']);
+}, 10 , 3);
+
+function render_robot_meta_boxes() {
+  // I won't bore you.
+}
+```
+
+OK, so that's not so bad. But what happens when you get two or three more custom post types you need to manage, and each of them has their own custom meta boxes? That's, like, nine inputs to render yourself! Hey, why isn't this field saving? Oh, there's a typo in the input markup, because yeah you still had to type that all our yourself.
+
+This is the part in the infomercial where the distraught customer says...
+
+### There's got to be a better way!
+
+Try this:
+
+```
+// functions.php
+include 'Robot.php';
+Robot::register();
+
+// Robot.php
+class Robot {
+  use \Cft\Traits\HasTextField;
+
+  public static function register() {
+    register_post_type('robot', ['label' => 'Robots', ...]);
+    self::hasCustomFields('robot');
+  }
+  
+  public function getFieldConfigs() {
+    return [
+      'name' => 'text',
+      'greeting' => 'text',
+      'disposition' => 'text'
+    ];
+  }
+}
+```
+
+Now isn't that nice?
+
 ## Contributing
 
 First install the repo and dev dependencies:

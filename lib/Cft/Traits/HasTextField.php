@@ -1,6 +1,6 @@
 <?php
 
-namespace Cft;
+namespace Cft\Traits;
 
 trait HasTextField {
   use HasField;

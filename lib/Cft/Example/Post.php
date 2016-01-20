@@ -3,7 +3,7 @@
 namespace Cft\Example;
 
 class Post {
-  use \Cft\HasTextField { getFieldConfigs as protected; }
+  use \Cft\Traits\HasTextField { getFieldConfigs as protected; }
 
   protected $postId;
   protected $bar;
