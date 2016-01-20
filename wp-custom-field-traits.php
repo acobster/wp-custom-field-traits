@@ -19,22 +19,32 @@ spl_autoload_register(function($className) {
   }
 });
 
-$plugin = Cft\Plugin::getInstance();
 
 
+$_cft_plugin_init = function() {
 
-/*
- * Set up sane, overrideable defaults for dependency injection
- */
+  /*
+   * Set up sane, overrideable defaults for dependency injection
+   */
+  $plugin = Cft\Plugin::getInstance();
+
+  // where to look for view files
+  $plugin->set('viewDirs', [CFT_PLUGIN_DIR . 'views/']);
+
+  // how to render views
+  $plugin->set('view', function() {
+    return new Cft\View\DustView( new \Dust\Dust() );
+  });
+
+};
+
+$_cft_plugin_init();
 
 
-// where to look for view files
-$plugin->set('viewDirs', [CFT_PLUGIN_DIR . 'views/']);
+// Clear up the global namespace
+unset($_cft_plugin_init);
 
-// how to render views
-$plugin->set('view', function() {
-  return new Cft\View\DustView( new \Dust\Dust() );
-});
+
 
 Cft\Example\Post::hasCustomFields('post');
 

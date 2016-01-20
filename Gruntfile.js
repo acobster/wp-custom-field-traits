@@ -35,6 +35,9 @@ module.exports = function(grunt) {
         dest: 'wordpress/wp-content/plugins/wp-custom-field-traits'
       }
     },
+    clean: {
+      dev: ['vendor', 'node_modules', 'wordpress']
+    },
 
     /*
      * We *only* want the src libs for the Dust library.
@@ -69,6 +72,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-php');
   grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Install dev dependencies
   grunt.registerTask('install', [
