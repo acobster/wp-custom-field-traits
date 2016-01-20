@@ -27,12 +27,20 @@ module.exports = function(grunt) {
       wp_plugin_activate: {
         cwd: 'wordpress',
         cmd: '../vendor/bin/wp plugin activate wp-custom-field-traits'
+      },
+      wp_theme_activate: {
+        cwd: 'wordpress',
+        cmd: '../vendor/bin/wp theme activate twentyfifteen-child'
       }
     },
     symlink: {
       plugin: {
         src: '.',
         dest: 'wordpress/wp-content/plugins/wp-custom-field-traits'
+      },
+      theme: {
+        src: 'test/test-theme',
+        dest: 'wordpress/wp-content/themes/cft-test-theme'
       }
     },
     clean: {
@@ -83,6 +91,8 @@ module.exports = function(grunt) {
     'exec:wp_install',
     'symlink:plugin',
     'exec:wp_plugin_activate',
+    'symlink:theme',
+    'exec:wp_theme_activate',
     'php'
   ]);
 };
