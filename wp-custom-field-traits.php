@@ -44,26 +44,3 @@ $_cft_plugin_init();
 // Clear up the global namespace
 unset($_cft_plugin_init);
 
-
-
-Cft\Example\Post::hasCustomFields('post');
-
-// $post = new Cft\Example\Post(1);
-// $post->hydrate();
-
-// $magic = new Cft\Example\MagicPost(1);
-// $magic->hydrate();
-
-// echo <<<_HTML_
-// <h1>Regular post</h1>
-
-// <p><code>\$post->get('bar')</code>: {$post->get('bar')}</p>
-// <p><code>\$post->get('baz')</code>: {$post->get('baz')}</p>
-
-// <h1>Magic post</h1>
-
-// <p><code>\$magic->bar</code>: {$magic->bar}</p>
-// <p><code>\$magic->baz</code>: {$magic->baz}</p>
-// _HTML_;
-
-// die();

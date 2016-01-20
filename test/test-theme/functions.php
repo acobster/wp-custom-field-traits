@@ -1,3 +1,3 @@
 <?php
 
-// silence is okay i guess
+Cft\Example\Post::hasCustomFields('post');

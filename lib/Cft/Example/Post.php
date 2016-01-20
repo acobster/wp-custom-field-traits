@@ -13,6 +13,10 @@ class Post {
     $this->postId = $postId;
   }
 
+  public function __get($var) {
+    return $this->fetchPost($this->postId)->{$var};
+  }
+
   protected function getFieldConfigs() {
     return [
       'bar' => 'text',
