@@ -35,6 +35,8 @@ WP Custom Field Traits is for developers who want to manage custom field configu
 
 Instead, this plugin defines traits that you can `use` in your own theme or plugin classes. Activating this plugin will not create a new admin panel for you to add fields to your posts. To get new fields on the back end, you still have to write your own code.
 
+While this is the plugin's biggest drawback, it is also its sharpest advantage: a skilled programmer can set up a group of custom fields in as much time as it would take to configure an ACF group--or less. The result will perform better than ACF because it doesn't have to go to the database just to know which meta fields to query. It's all right there in the code. This also means that deployment to staging/production/wherever is a breeze: if the code is there, It Just Works.
+
 ## Why Traits?
 
 Traits have been around since PHP 5.4 (and OO PHP has been around even longer!), but WordPress development seldom takes advantage of this, typically favoring the imperative programming style. This can lead to all sorts of headaches, but the one I've found the most pervasive and the most counter-productive is the lack of reusability.
