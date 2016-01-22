@@ -16,6 +16,11 @@ abstract class AbstractBase {
     $this->postId = $postId;
     $this->name = $name;
     $this->config = $config;
+
+    $this->type = is_array($config)
+      ? $config['type']
+      : $config;
+
     $this->meta = $meta;
   }
 
