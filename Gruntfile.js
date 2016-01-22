@@ -61,14 +61,19 @@ module.exports = function(grunt) {
         dest: 'lib/'
       }
     },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+
+    phpunit: {
+      classes: {
+        dir: 'test/cases/'
       },
-      lib_test: {
-        files: '<%= jshint.lib_test.src %>',
-        tasks: ['jshint:lib_test', 'nodeunit']
+      options: {
+        configuration: 'phpunit.xml'
+      }
+    },
+    watch: {
+      test: {
+        files: ['lib/**/*.php', 'test/**/*.php'],
+        tasks: 'phpunit'
       }
     }
   });
@@ -81,6 +86,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-symlink');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-phpunit');
 
   // Install dev dependencies
   grunt.registerTask('install', [
