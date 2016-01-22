@@ -6,6 +6,8 @@ namespace Cft;
  * Simple Singleton Plugin class for bare-bones dependency injection
  */
 final class Plugin {
+  const ACTION_PRIORITY = 10;
+
   private static $instance;
 
   private $attributes = [];

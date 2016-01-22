@@ -2,6 +2,7 @@
 
 namespace Cft\Traits;
 
+use Cft\Plugin;
 use Cft\Field\Factory;
 
 trait HasField {
@@ -22,8 +23,8 @@ trait HasField {
     };
 
     // TODO use post-specific action, e.g. add_meta_boxes_post...
-    add_action('add_meta_boxes', $addMeta, CFT_ACTION_PRIORITY, $numArgs = 2 );
-    add_action('save_post', $save, CFT_ACTION_PRIORITY, $numArgs = 3 );
+    add_action('add_meta_boxes', $addMeta, Plugin::ACTION_PRIORITY, $numArgs = 2 );
+    add_action('save_post', $save, Plugin::ACTION_PRIORITY, $numArgs = 3 );
   }
 
   public function hydrate() {

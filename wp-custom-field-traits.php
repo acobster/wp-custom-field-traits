@@ -7,7 +7,6 @@
  */
 
 define('CFT_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('CFT_ACTION_PRIORITY', 10);
 
 spl_autoload_register(function($className) {
   $path = str_replace('\\', '/', $className);
