@@ -7,7 +7,7 @@
     },
     "require-dev": {
         "johnpbloch/wordpress": "~4.4",
-        "idct/composer-custom-directory": "dev-master",
+        "10up/wp_mock": "*@stable",
         "wp-cli/wp-cli": "~0.22"
     },
     "license": "MIT",
