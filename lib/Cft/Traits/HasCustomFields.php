@@ -5,7 +5,7 @@ namespace Cft\Traits;
 use Cft\Plugin;
 use Cft\Field\Factory;
 
-trait HasField {
+trait HasCustomFields {
   protected $cftFields = [];
 
   abstract public function getFieldConfigs();
