@@ -8,13 +8,15 @@ namespace Cft;
 final class Plugin {
   private static $instance;
 
+  private $attributes = [];
+
   private $viewDirs = [
     CFT_PLUGIN_DIR
   ];
 
   public function getInstance() {
     if( ! self::$instance ) {
-      self::$instance = new static();
+      self::$instance = new Plugin();
     }
 
     return self::$instance;
@@ -24,14 +26,14 @@ final class Plugin {
   private function __construct() { }
 
   public function get( $key ) {
-    if( isset($this->{$key}) ) {
-      return is_callable( $this->{$key} )
-        ? call_user_func( $this->{$key} )
-        : $this->{$key};
+    if( isset($this->attributes[$key]) ) {
+      return is_callable( $this->attributes[$key] )
+        ? call_user_func( $this->attributes[$key] )
+        : $this->attributes[$key];
     }
   }
 
   public function set( $key, $value ) {
-    $this->{$key} = $value;
+    $this->attributes[$key] = $value;
   }
 }
