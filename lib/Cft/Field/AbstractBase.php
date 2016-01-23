@@ -32,7 +32,7 @@ abstract class AbstractBase {
   /**
    * Register this field to render in the admin
    */
-  abstract public function register();
+  abstract public function register( $postType );
 
   /**
    * Render this field in the admin
