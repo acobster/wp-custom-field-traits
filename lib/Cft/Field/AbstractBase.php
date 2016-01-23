@@ -24,10 +24,31 @@ abstract class AbstractBase {
     $this->meta = $meta;
   }
 
+  /**
+   * Get this field's current value
+   */
   abstract public function getValue();
+
+  /**
+   * Register this field to render in the admin
+   */
+  abstract public function register();
+
+  /**
+   * Render this field in the admin
+   */
+  abstract public function render();
+
+  /**
+   * Save this field as metadata on the post
+   */
   abstract public function save();
+
+  /**
+   * Get the new, user-submitted value to save
+   */
   abstract public function getPostedValue();
-  abstract public function getMetaBox();
+
 
   public function setValue( $value ) {
     $this->value = $value;
@@ -43,19 +64,6 @@ abstract class AbstractBase {
 
   public function getPostId() {
     return $this->postId;
-  }
-
-  public function addMetaBox( $type = null ) {
-    add_meta_box(
-      $this->getHtmlId(),
-      $this->getTitle(),
-      [$this, 'renderMetaBox'],
-      $type
-    );
-  }
-
-  public function renderMetaBox() {
-    echo $this->getMetaBox();
   }
 
   protected function getHtmlId() {

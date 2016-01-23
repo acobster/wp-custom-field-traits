@@ -5,14 +5,16 @@ namespace Cft\Field;
 use Cft\Plugin;
 
 class TextArea extends AbstractBase {
+  use \Cft\Traits\Field\InMetaBox;
+
   public function getValue() {
     return $this->meta[0];
   }
 
-  public function getMetaBox() {
+  public function render() {
     $view = Plugin::getInstance()->get('view');
 
-    return $view->render(
+    echo $view->render(
       'textarea.dust',
       [
         'name' => $this->getName(),

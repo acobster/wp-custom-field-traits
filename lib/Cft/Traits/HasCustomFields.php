@@ -14,7 +14,7 @@ trait HasCustomFields {
     $addMeta = $addMeta ?: function( $type, $wpPost ) use($postType) {
       $post = new static($wpPost->ID);
       $post->hydrate();
-      $post->renderMetaBoxes( $postType );
+      $post->renderFields( $postType );
     };
 
     $save = $save ?: function( $id, $wpPost, $update ) {
@@ -38,11 +38,11 @@ trait HasCustomFields {
     }
   }
 
-  public function renderMetaBoxes( $postType = null ) {
+  public function renderFields( $postType = null ) {
     $this->renderNonce();
 
     foreach( $this->getFields() as $field ) {
-      $field->addMetaBox( $postType );
+      $field->register( $postType );
     }
   }
 
