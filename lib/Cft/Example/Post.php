@@ -22,6 +22,7 @@ class Post {
       'bar' => 'text',
       'baz' => 'text',
       'qux' => 'textarea',
+      'hello' => 'wysiwyg',
     ];
   }
 }

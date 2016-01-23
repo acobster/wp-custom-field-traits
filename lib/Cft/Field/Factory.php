@@ -6,6 +6,7 @@ final class Factory {
   protected static $TYPES = [
     'text' => '\Cft\Field\Text',
     'textarea' => '\Cft\Field\TextArea',
+    'wysiwyg' => '\Cft\Field\Wysiwyg',
   ];
 
   public static function build( $id, $name, $config, array $meta = null ) {
