@@ -27,6 +27,14 @@ abstract class AbstractBase {
    */
   abstract public function compile( $template, $data );
 
+  /**
+   * Get the internal template engine, e.g. the instance of \Dust\Dust
+   * @return  object
+   */
+  public function getEngine() {
+    return $this->engine;
+  }
+
   protected function getViewPath( $file ) {
     $dirs = Plugin::getInstance()->get('viewDirs');
 
