@@ -101,4 +101,11 @@ module.exports = function(grunt) {
     'exec:wp_theme_activate',
     'php'
   ]);
+
+  grunt.registerTask('db', [
+    'exec:mysql',
+    'exec:wp_install',
+    'exec:wp_plugin_activate',
+    'exec:wp_theme_activate',
+  ]);
 };
