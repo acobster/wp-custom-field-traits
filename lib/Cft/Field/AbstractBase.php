@@ -39,16 +39,6 @@ abstract class AbstractBase {
    */
   abstract public function render();
 
-  /**
-   * Save this field as metadata on the post
-   */
-  abstract public function save();
-
-  /**
-   * Get the new, user-submitted value to save
-   */
-  abstract public function getPostedValue();
-
 
   public function setValue( $value ) {
     $this->value = $value;
@@ -64,6 +54,14 @@ abstract class AbstractBase {
 
   public function getPostId() {
     return $this->postId;
+  }
+
+  public function save() {
+     update_post_meta( $this->getPostId(), $this->getName(), $this->getPostedValue() );
+  }
+
+  public function getPostedValue() {
+    return $_POST[$this->getName()];
   }
 
   protected function getHtmlId() {

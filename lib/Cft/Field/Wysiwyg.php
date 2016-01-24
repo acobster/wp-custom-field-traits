@@ -21,14 +21,6 @@ class Wysiwyg extends AbstractBase {
     );
   }
 
-  public function save() {
-     update_post_meta( $this->getPostId(), $this->getName(), $this->getPostedValue() );
-  }
-
-  public function getPostedValue() {
-    return $_POST[$this->getName()];
-  }
-
   /**
    * Special implementation required here, since the id "may only contain lowercase
    * letters and underscores...hyphens will cause editor to not display properly"

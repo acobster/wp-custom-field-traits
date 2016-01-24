@@ -23,11 +23,5 @@ class TextArea extends AbstractBase {
     );
   }
 
-  public function save() {
-     update_post_meta( $this->getPostId(), $this->getName(), $this->getPostedValue() );
-  }
 
-  public function getPostedValue() {
-    return $_POST[$this->getName()];
-  }
 }
