@@ -19,13 +19,26 @@ class Post {
 
   protected function getFieldConfigs() {
     return [
-      'bar' => 'text',
+      'bar' => [
+        'type' => 'text',
+        'label' => 'Bar',
+        'attributes' => [
+          'class' => 'bar-box',
+          'disabled' => true
+        ],
+      ],
       'baz' => 'text',
       'number_of_things' => 'number',
       'some_email' => 'email',
       'super_secure_password' => 'password',
       'my_website' => 'url',
-      'qux' => 'textarea',
+      'qux' => [
+        'type' => 'textarea',
+        'label' => 'Q. U. X.',
+        'attributes' => [
+          'style' => 'background: rgba(128,128,128,.5);'
+        ],
+      ],
       'hello' => 'wysiwyg',
     ];
   }

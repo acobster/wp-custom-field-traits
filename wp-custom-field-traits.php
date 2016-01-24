@@ -32,7 +32,22 @@ $_cft_plugin_init = function() {
 
   // how to render views
   $plugin->set('view', function() {
-    return new Cft\View\DustView( new \Dust\Dust() );
+    $dust = new \Dust\Dust();
+
+    $dust->filters['atts'] = new Cft\View\DustFilter( function( array $atts ) {
+      $htmlAtts = [];
+      foreach( $atts as $key => $value ) {
+        // allow for specifying value-less attributes such as "disabled"
+        // by passing literal true
+        $htmlAtts[] = $value === true
+          ? $key
+          : "{$key}=\"{$value}\"";
+      }
+
+      return implode( ' ', $htmlAtts );
+    });
+
+    return new Cft\View\DustView( $dust );
   });
 
 };

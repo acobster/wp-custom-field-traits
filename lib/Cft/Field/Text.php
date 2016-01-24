@@ -20,6 +20,7 @@ class Text extends AbstractBase {
         'name' => $this->getName(),
         'value' => $this->getValue(),
         'type' => $this->getType(),
+        'attributes' => $this->getConfig('attributes'),
       ]
     );
   }

@@ -19,6 +19,7 @@ class TextArea extends AbstractBase {
       [
         'name' => $this->getName(),
         'text' => $this->getValue(),
+        'attributes' => $this->getConfig('attributes'),
       ]
     );
   }
