@@ -21,6 +21,10 @@ class Post {
     return [
       'bar' => 'text',
       'baz' => 'text',
+      'number_of_things' => 'number',
+      'some_email' => 'email',
+      'super_secure_password' => 'password',
+      'my_website' => 'url',
       'qux' => 'textarea',
       'hello' => 'wysiwyg',
     ];

@@ -5,6 +5,10 @@ namespace Cft\Field;
 final class Factory {
   protected static $TYPES = [
     'text' => '\Cft\Field\Text',
+    'number' => '\Cft\Field\Number',
+    'email' => '\Cft\Field\Email',
+    'password' => '\Cft\Field\Password',
+    'url' => '\Cft\Field\Url',
     'textarea' => '\Cft\Field\TextArea',
     'wysiwyg' => '\Cft\Field\Wysiwyg',
   ];
