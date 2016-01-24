@@ -6,7 +6,7 @@ trait InMetaBox {
   public function register( $postType ) {
     add_meta_box(
       $this->getHtmlId(),
-      $this->getTitle(),
+      $this->getLabel(),
       [$this, 'render'],
       $postType
     );

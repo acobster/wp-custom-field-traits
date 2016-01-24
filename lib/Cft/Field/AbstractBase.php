@@ -68,8 +68,8 @@ abstract class AbstractBase {
     return static::HTML_PREFIX . $this->getName();
   }
 
-  protected function getTitle() {
-    return $this->getConfig('title') ?: $this->getName();
+  protected function getLabel() {
+    return $this->getConfig('label') ?: $this->getName();
   }
 
   protected function getConfig( $key ) {
