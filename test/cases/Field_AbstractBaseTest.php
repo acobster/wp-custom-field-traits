@@ -13,7 +13,7 @@ class Field_AbstractBaseTest extends Base {
 
 	protected $postId = 123;
 	protected $name = 'my_field';
-	
+
 	protected $config = [
 		'type' => 'some_type',
 		'attributes' => [
@@ -54,7 +54,7 @@ class Field_AbstractBaseTest extends Base {
 		$ab = $this->getMockBuilder('\Cft\Field\AbstractBase')
 			->setConstructorArgs([345, 'whatevs', 'some_type'])
 			->getMockForAbstractClass();
-		
+
 		$this->assertEquals( $ab->getType(), 'some_type' );
 	}
 
@@ -89,5 +89,5 @@ class Field_AbstractBaseTest extends Base {
 		$this->subject->expects($this->any())
 			->method($method)
 			->will($this->returnValue($return));
-	} 
+	}
 }

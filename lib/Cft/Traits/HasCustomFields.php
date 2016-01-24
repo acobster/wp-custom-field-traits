@@ -32,6 +32,7 @@ trait HasCustomFields {
 
     foreach( $this->getFieldConfigs() as $name => $config ) {
       $fieldMeta = isset($meta[$name]) ? $meta[$name] : [];
+      // FIXME make factory injectable
       $field = Factory::build( $this->getPostId(), $name, $config, $fieldMeta );
       $this->cftFields[$name] = $field;
       $this->set( $name, $field->getValue() );
@@ -61,10 +62,12 @@ trait HasCustomFields {
   }
 
   public function save() {
-    wp_verify_nonce( 'post/save', 'cft_nonce' );
+    if( ! wp_verify_nonce('post/save', 'cft_nonce') ) {
+      return false;
+    }
 
     foreach( $this->getFieldConfigs() as $name => $config ) {
-      error_log($this->getPostedValue($name));
+      // FIXME use DI
       $field = Factory::build(
         $this->getPostId(),
         $name,
