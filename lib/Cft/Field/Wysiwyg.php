@@ -5,10 +5,6 @@ namespace Cft\Field;
 use Cft\Plugin;
 
 class Wysiwyg extends AbstractBase {
-  public function getValue() {
-    return $this->meta[0];
-  }
-
   public function register( $postType ) {
     add_action( 'edit_form_advanced', [$this, 'render'] );
   }

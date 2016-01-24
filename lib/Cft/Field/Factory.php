@@ -13,7 +13,7 @@ final class Factory {
     'wysiwyg' => '\Cft\Field\Wysiwyg',
   ];
 
-  public static function build( $id, $name, $config, array $meta = null ) {
+  public static function build( $id, $name, $config, $value = '' ) {
     $type = is_array( $config )
       ? $config['type']
       : strval( $config );
@@ -24,7 +24,7 @@ final class Factory {
 
     $class = static::$TYPES[$type];
 
-    return new $class($id, $name, $config, $meta);
+    return new $class($id, $name, $config, $value);
   }
 
   public static function registerType( $type, $className ) {

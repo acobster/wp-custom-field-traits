@@ -24,7 +24,6 @@ class Post {
         'label' => 'Bar',
         'attributes' => [
           'class' => 'bar-box',
-          'disabled' => true
         ],
       ],
       'baz' => 'text',

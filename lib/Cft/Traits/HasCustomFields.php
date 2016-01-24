@@ -64,13 +64,24 @@ trait HasCustomFields {
     wp_verify_nonce( 'post/save', 'cft_nonce' );
 
     foreach( $this->getFieldConfigs() as $name => $config ) {
-      $field = Factory::build( $this->getPostId(), $name, $config );
+      error_log($this->getPostedValue($name));
+      $field = Factory::build(
+        $this->getPostId(),
+        $name,
+        $config,
+        $this->getPostedValue($name)
+      );
+
       $field->save();
     }
   }
 
   public function getPostId() {
     return $this->postId;
+  }
+
+  protected function getPostedValue( $name ) {
+    return isset($_POST[$name]) ? $_POST[$name] : '';
   }
 
   protected function renderNonce() {

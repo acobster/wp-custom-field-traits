@@ -2,6 +2,8 @@
 
 namespace Cft\Field;
 
+use \Cft\Exception;
+
 abstract class AbstractBase {
   const HTML_PREFIX = 'cft-';
 
@@ -9,10 +11,13 @@ abstract class AbstractBase {
   protected $postId;
   protected $name;
   protected $config;
-  protected $meta;
   protected $value;
 
-  public function __construct( $postId, $name, $config, array $meta = null ) {
+  public function __construct( $postId, $name, $config, $value = '' ) {
+    if( is_array($config) && empty($config['type']) ) {
+      throw new Exception('invalid config: no type specified');
+    }
+
     $this->postId = $postId;
     $this->name = $name;
     $this->config = $config;
@@ -21,13 +26,9 @@ abstract class AbstractBase {
       ? $config['type']
       : $config;
 
-    $this->meta = $meta;
+    $this->value = $value;
   }
 
-  /**
-   * Get this field's current value
-   */
-  abstract public function getValue();
 
   /**
    * Register this field to render in the admin
@@ -39,6 +40,16 @@ abstract class AbstractBase {
    */
   abstract public function render();
 
+
+  public function getValue() {
+    // Assume value is scalar. If you need to store an array,
+    // use a more specialized field type for that.
+    if( is_array($this->value) && isset($this->value[0]) ) {
+      return $this->value[0];
+    }
+
+    return $this->value;
+  }
 
   public function setValue( $value ) {
     $this->value = $value;
@@ -57,11 +68,7 @@ abstract class AbstractBase {
   }
 
   public function save() {
-     update_post_meta( $this->getPostId(), $this->getName(), $this->getPostedValue() );
-  }
-
-  public function getPostedValue() {
-    return $_POST[$this->getName()];
+     return update_post_meta( $this->getPostId(), $this->getName(), $this->getValue() );
   }
 
   protected function getHtmlId() {
