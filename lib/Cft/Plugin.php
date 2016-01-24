@@ -16,7 +16,7 @@ final class Plugin {
     CFT_PLUGIN_DIR
   ];
 
-  public function getInstance() {
+  public static function getInstance() {
     if( ! self::$instance ) {
       self::$instance = new Plugin();
     }
@@ -29,9 +29,12 @@ final class Plugin {
 
   public function get( $key ) {
     if( isset($this->attributes[$key]) ) {
-      return is_callable( $this->attributes[$key] )
-        ? call_user_func( $this->attributes[$key] )
-        : $this->attributes[$key];
+      if( is_callable( $this->attributes[$key] ) ) {
+        // Cache the value of the callable in object memory
+        $this->attributes[$key] = call_user_func( $this->attributes[$key] );
+      }
+
+      return $this->attributes[$key];
     }
   }
 
