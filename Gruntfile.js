@@ -34,6 +34,9 @@ module.exports = function(grunt) {
       }
     },
     symlink: {
+      options: {
+        overwrite: true
+      },
       plugin: {
         src: '.',
         dest: 'wordpress/wp-content/plugins/wp-custom-field-traits'
