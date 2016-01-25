@@ -69,7 +69,7 @@ function render_robot_meta_boxes() {
 }
 ```
 
-OK, so that's not so bad. But what happens when you get two or three more custom post types you need to manage, and each of them has their own custom meta boxes? That's, like, nine inputs to render yourself! Hey, why isn't this field saving? Oh, there's a typo in the input markup, because yeah you still had to type that all our yourself.
+OK, so that's not so bad. But what happens when you get two or three more custom post types you need to manage, and each of them has their own custom meta boxes? That's, like, nine inputs to render yourself! Hey, why isn't this field saving? Oh, there's a typo in the input markup, because yeah you still had to type that all out yourself.
 
 This is the part in the infomercial where the distraught customer says...
 
