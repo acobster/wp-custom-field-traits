@@ -132,16 +132,8 @@ $ ../vendor/bin/wp core install --prompt
 
 ## TODO
 
-#### Currently this only supports basic text fields, with no configuration.
-
-2. Bootstrap testing workflow (PHPUnit, WP_UnitTestCase, QUnit/Jasmine/Karma?)
-3. Implement text field configurations
+2. Implement field validation
 3. Implement fields:
-	* number
-	* email
-	* url
-	* password
-	* wysiwyg
 	* image (with crop option)
 	* file
 	* gallery
