@@ -6,8 +6,6 @@ class MagicPost {
   use \Cft\Traits\HasTextField { getFieldConfigs as protected; }
   use \Cft\Traits\HasMagicField;
 
-  protected $postId;
-
   public function __construct($postId) {
     $this->postId = $postId;
   }

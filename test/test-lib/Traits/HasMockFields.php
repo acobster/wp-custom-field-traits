@@ -6,6 +6,7 @@ trait HasMockFields {
   public function getField( $postId, $name, $config, $value = '' ) {
     $field = $this->getMockBuilder('Cft\Field\AbstractBase')
       ->setConstructorArgs( [$postId, $name, $config, $value] )
+      ->setMethods( ['save'] )
       ->getMockForAbstractClass();
 
     $field->expects( $this->once() )

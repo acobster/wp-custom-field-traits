@@ -5,7 +5,6 @@ namespace Cft\Example;
 class Post {
   use \Cft\Traits\HasCustomFields { getFieldConfigs as protected; }
 
-  protected $postId;
   protected $bar;
   protected $baz;
 

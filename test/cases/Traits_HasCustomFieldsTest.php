@@ -20,8 +20,12 @@ class Traits_HasCustomFieldsTest extends Base {
     $instance->expects( $this->never() )
       ->method( 'getFieldConfigs' );
 
+    Plugin::getInstance()->set('request', [
+      'cft_nonce' => 'asdf'
+    ]);
+
     WP::wpFunction( 'wp_verify_nonce', [
-      'args' => ['post/save', 'cft_nonce'],
+      'args' => ['asdf', 'cft_save_meta'],
       'times' => 1,
       'return' => false
     ]);
@@ -38,9 +42,17 @@ class Traits_HasCustomFieldsTest extends Base {
     ]);
 
     WP::wpFunction( 'wp_verify_nonce', [
-      'args' => ['post/save', 'cft_nonce'],
+      'args' => ['nonce value', 'cft_save_meta'],
       'times' => 1,
       'return' => 1
+    ]);
+
+    Plugin::getInstance()->set('request', [
+      'cft_nonce' => 'nonce value',
+      'foo' => 'I am FOO',
+      'bar' => 'I am BAR',
+      'baz' => 'I am BAZ',
+      'qux' => 'I am QUX',
     ]);
 
     // Mock Field instances
@@ -57,10 +69,11 @@ class Traits_HasCustomFieldsTest extends Base {
       [$this->postId, 'qux', 'wysiwyg', 'I am QUX', $qux],
     ];
 
-    $builder = $this->getMock('\Cft\FieldBuilder');
-    $builder->expects( $this->exactly(4) )
-      ->method( 'build' )
-      ->with( $this->postId, 'foo', 'text', 'I am FOO' )
+    $builder = $this->getMockBuilder('\Cft\FieldBuilder')
+      ->setMethods(['build'])
+      ->getMock();
+
+    $builder->method( 'build' )
       ->will( $this->returnValueMap($map) );
 
     Plugin::getInstance()->set('fieldBuilder', $builder);
@@ -74,6 +87,11 @@ class Traits_HasCustomFieldsTest extends Base {
     $instance->expects( $this->any() )
       ->method( 'getFieldConfigs' )
       ->will( $this->returnValue($config) );
+
+    $reflection = new \ReflectionClass( $instance );
+    $id = $reflection->getProperty( 'postId' );
+    $id->setAccessible( true );
+    $id->setValue( $instance, $this->postId );
 
     return $instance;
   }

@@ -27,6 +27,14 @@ $_cft_plugin_init = function() {
    */
   $plugin = Cft\Plugin::getInstance();
 
+  // encapsulate the HTTP request so that we can populate it explicitly,
+  // with data from anywhere
+  if( $_POST ) {
+    $plugin->set('request', $_POST);
+  }
+
+  $plugin->set('fieldBuilder', new Cft\FieldBuilder());
+
   // where to look for view files
   $plugin->set('viewDirs', [CFT_PLUGIN_DIR . 'views/']);
 
