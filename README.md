@@ -105,6 +105,15 @@ Now isn't that nice?
 
 ## Contributing
 
+### Guidelines
+
+1. Please write unit tests for any new features you implement.
+2. Please make sure when you change anything that all unit tests still pass. I will not accept pull requests that break the existing tests.
+2. Please preserve the existing coding style to maintain readability
+3. In general, use the `grunt watch` task for testing changes on the fly. This runs unit tests for you whenever files change.
+
+### Basic developer installation
+
 First install the repo and dev dependencies:
 
 ```
