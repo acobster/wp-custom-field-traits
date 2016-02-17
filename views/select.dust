@@ -1,0 +1,5 @@
+<select name="{name}" {attributes|atts}>
+{#options}
+  <option value="{value}">{label}</option>
+{/options}
+</select>

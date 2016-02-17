@@ -10,6 +10,7 @@ class FieldBuilder {
     'password' => '\Cft\Field\Password',
     'url' => '\Cft\Field\Url',
     'textarea' => '\Cft\Field\TextArea',
+    'select' => '\Cft\Field\Select',
     'wysiwyg' => '\Cft\Field\Wysiwyg',
   ];
 
