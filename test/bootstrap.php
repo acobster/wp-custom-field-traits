@@ -1,6 +1,6 @@
 <?php
 
-define( 'CFT_PLUGIN_DIR', realpath(__DIR__.'/../') );
+define( 'CFT_PLUGIN_DIR', realpath(__DIR__.'/../') . '/' );
 
 require_once 'vendor/autoload.php';
 require_once 'lib/Cft/Plugin.php';
