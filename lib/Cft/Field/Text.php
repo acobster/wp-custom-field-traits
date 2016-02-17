@@ -20,6 +20,4 @@ class Text extends AbstractBase {
       ]
     );
   }
-
-
 }
