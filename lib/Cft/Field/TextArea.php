@@ -11,7 +11,7 @@ class TextArea extends AbstractBase {
     $view = Plugin::getInstance()->get('view');
 
     echo $view->render(
-      'textarea.dust',
+      'textarea.twig',
       [
         'name' => $this->getName(),
         'text' => $this->getValue(),

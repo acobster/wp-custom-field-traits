@@ -9,7 +9,7 @@
 define('CFT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 spl_autoload_register(function($className) {
-  $path = str_replace('\\', '/', $className);
+  $path = preg_replace('~[\\\\_]~', '/', $className);
 
   $dir = CFT_PLUGIN_DIR . 'lib/';
 
@@ -38,11 +38,23 @@ $_cft_plugin_init = function() {
   // where to look for view files
   $plugin->set('viewDirs', [CFT_PLUGIN_DIR . 'views/']);
 
-  // how to render views
-  $plugin->set('view', function() {
-    $dust = new \Dust\Dust();
+  // where to cache rendered views
+  $plugin->set('viewCache', CFT_PLUGIN_DIR . 'view-cache/');
 
-    $dust->filters['atts'] = new Cft\View\DustFilter( function( array $atts ) {
+  // Twig options
+  $plugin->set('viewOptions', [
+    'cache' => $plugin->get('viewCache'),
+    'debug' => WP_DEBUG,
+  ]);
+
+  // how to render views
+  $plugin->set('view', function() use($plugin) {
+    $loader = new Twig_Loader_Filesystem($plugin->get('viewDirs'));
+
+    $twig = new Twig_Environment($loader, $plugin->get('viewOptions'));
+
+    // Twig filter for rendering assoc arrays as HTML attributes
+    $twig->addFilter( new Twig_SimpleFilter('atts', function(array $atts) {
       $htmlAtts = [];
       foreach( $atts as $key => $value ) {
         // allow for specifying value-less attributes such as "disabled"
@@ -53,9 +65,9 @@ $_cft_plugin_init = function() {
       }
 
       return implode( ' ', $htmlAtts );
-    });
+    }));
 
-    return new Cft\View\DustView( $dust );
+    return new Cft\View\TwigView( $twig );
   });
 
 };

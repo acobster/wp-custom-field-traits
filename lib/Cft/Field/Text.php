@@ -11,12 +11,12 @@ class Text extends AbstractBase {
     $view = Plugin::getInstance()->get('view');
 
     echo $view->render(
-      'input.dust',
+      'input.twig',
       [
         'name' => $this->getName(),
         'value' => $this->getValue(),
         'type' => $this->getType(),
-        'attributes' => $this->getConfig('attributes'),
+        'attributes' => $this->getConfig('attributes') ?: [],
       ]
     );
   }

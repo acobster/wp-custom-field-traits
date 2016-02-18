@@ -24,19 +24,14 @@ class Select extends AbstractBase {
   public function render() {
     $view = Plugin::getInstance()->get('view');
 
-    $options = [];
-    foreach ($this->getConfig('options') as $value => $label) {
-      $options[] = ['value' => $value, 'label' => $label];
-    }
-
     echo $view->render(
-      'select.dust',
+      'select.twig',
       [
         'name' => $this->getName(),
         'value' => $this->getValue(),
         'type' => $this->getType(),
         'attributes' => $this->getConfig('attributes'),
-        'options' => $options,
+        'options' => $this->getConfig('options'),
       ]
     );
   }
