@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       },
       wp_theme_activate: {
         cwd: 'wordpress',
-        cmd: '../vendor/bin/wp theme activate twentyfifteen-child'
+        cmd: '../vendor/bin/wp theme activate cft-test-theme'
       }
     },
     symlink: {
@@ -51,16 +51,16 @@ module.exports = function(grunt) {
     },
 
     /*
-     * We *only* want the src libs for the Dust library.
+     * We *only* want the src libs for the Twig libs.
      * Composer custom directories are not fine-grained enough for this,
      * so use grunt-contrib-copy
      */
     copy: {
-      dust_php: {
+      twig: {
         nonull: true,
         expand: true,
-        cwd: 'vendor/dust-php/dust-php/src/',
-        src: 'Dust/**',
+        cwd: 'vendor/twig/twig/lib/',
+        src: 'Twig/**',
         dest: 'lib/'
       }
     },
