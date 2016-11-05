@@ -16,4 +16,5 @@ wp-content/wp-cache-config.php
 /wordpress/
 /node_modules/
 *.sublime-project
+*.sublime-workspace
 view-cache/
