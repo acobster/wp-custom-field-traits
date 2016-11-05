@@ -2,8 +2,8 @@
 
 namespace CftTest\TestCase;
 
-require 'lib/Cft/Field/AbstractBase.php';
-require 'lib/Cft/Exception.php';
+require_once 'lib/Cft/Field/AbstractBase.php';
+require_once 'lib/Cft/Exception.php';
 
 use \WP_Mock as WP;
 use \Cft\Field\AbstractBase;

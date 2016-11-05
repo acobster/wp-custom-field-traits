@@ -15,6 +15,7 @@ class FieldBuilder {
   ];
 
   public function build( $id, $name, $config, $value = '' ) {
+    // get type from config, or take it as a string for shorthand
     $type = is_array($config)
       ? $config['type']
       : strval($config);
