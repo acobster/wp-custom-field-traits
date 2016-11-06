@@ -2,7 +2,9 @@
 
 namespace Cft\Field;
 
+use \Cft\Validator\AbstractBase as Validator;
 use \Cft\Exception;
+use \Cft\Exception\ValidationError;
 
 abstract class AbstractBase {
   const HTML_PREFIX = 'cft-';
@@ -13,6 +15,9 @@ abstract class AbstractBase {
   protected $config;
   protected $value;
 
+  protected $validators;
+  protected $errors;
+
   public function __construct( $postId, $name, $config, $value = '' ) {
     if( is_array($config) && empty($config['type']) ) {
       throw new Exception('invalid config: no type specified');
@@ -21,6 +26,7 @@ abstract class AbstractBase {
     $this->postId = $postId;
     $this->name = $name;
     $this->config = $config;
+    $this->validators = [];
 
     $this->type = is_array($config)
       ? $config['type']
@@ -67,8 +73,32 @@ abstract class AbstractBase {
     return $this->postId;
   }
 
+  public function getErrors() {
+    return $this->errors;
+  }
+
+  public function getValidators() {
+    return $this->validators;
+  }
+
   public function save() {
      return update_post_meta( $this->getPostId(), $this->getName(), $this->getValue() );
+  }
+
+  public function validate() {
+    return array_reduce($this->validators, function($valid, $validator) {
+      if( ! $fieldValid = $validator->isValid($this) ) {
+        $this->errors[] = $validator->getErrorMessage();
+      }
+
+      $valid = $fieldValid && $valid;
+
+      return $valid;
+    }, true);
+  }
+
+  public function attachValidator(Validator $validator) {
+    $this->validators[] = $validator;
   }
 
   protected function getHtmlId() {

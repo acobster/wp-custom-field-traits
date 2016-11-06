@@ -3,6 +3,9 @@
 namespace Cft;
 
 class FieldBuilder {
+  protected $plugin;
+  protected $validatorBuilder;
+
   protected $types = [
     'text' => '\Cft\Field\Text',
     'number' => '\Cft\Field\Number',
@@ -13,6 +16,11 @@ class FieldBuilder {
     'select' => '\Cft\Field\Select',
     'wysiwyg' => '\Cft\Field\Wysiwyg',
   ];
+
+  public function __construct(Plugin $plugin) {
+    $this->plugin = $plugin;
+    $this->validatorBuilder = $plugin->get('validatorBuilder');
+  }
 
   public function build( $id, $name, $config, $value = '' ) {
     // get type from config, or take it as a string for shorthand
@@ -26,7 +34,22 @@ class FieldBuilder {
 
     $class = $this->types[$type];
 
-    return new $class($id, $name, $config, $value);
+    $field = new $class($id, $name, $config, $value);
+
+    // attach validators
+    if( isset($config['validators']) ) {
+      if( ! is_array($config['validators'])) {
+        throw new Exception('`validators` must be an array');
+      }
+
+      foreach( $config['validators'] as $type => $validatorConfig ) {
+        if ($validatorConfig) {
+          $field->attachValidator( $this->validatorBuilder->build($type, $validatorConfig) );
+        }
+      }
+    }
+
+    return $field;
   }
 
   public function registerType( $type, $className ) {

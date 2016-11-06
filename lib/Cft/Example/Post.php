@@ -24,6 +24,12 @@ class Post {
         'attributes' => [
           'class' => 'bar-box',
         ],
+        'validators' => [
+          'required' => true,
+          'alphanumeric' => true,
+          'max_length' => 16,
+          'min_length' => 4,
+        ],
       ],
       'baz' => 'text',
       'number_of_things' => 'number',

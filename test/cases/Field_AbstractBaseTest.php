@@ -2,11 +2,20 @@
 
 namespace CftTest\TestCase;
 
+use CftTest\Traits\HasMockValidators;
+
 require_once 'lib/Cft/Field/AbstractBase.php';
+require_once 'lib/Cft/ValidatorBuilder.php';
+require_once 'lib/Cft/Validator/AbstractBase.php';
+require_once 'lib/Cft/Validator/Required.php';
+require_once 'lib/Cft/Validator/Regex.php';
+require_once 'lib/Cft/Validator/AlphaNumeric.php';
+require_once 'lib/Cft/Validator/MaxLength.php';
 require_once 'lib/Cft/Exception.php';
 
 use \WP_Mock as WP;
 use \Cft\Field\AbstractBase;
+use \Cft\Validator;
 
 class Field_AbstractBaseTest extends Base {
 	protected $subject;
@@ -84,10 +93,31 @@ class Field_AbstractBaseTest extends Base {
 	}
 
 
+	public function testAttachValidator() {
+		$validator = new Validator\Required([]);
+		$this->subject->attachValidator($validator);
 
-	protected function expectAbstractMethodWillReturn( $method, $return ) {
-		$this->subject->expects($this->any())
-			->method($method)
-			->will($this->returnValue($return));
+		$validatorList = $this->getProtectedProperty($this->subject, 'validators');
+		$this->assertEquals ( [$validator], $validatorList );
+	}
+
+	public function testValidateWithValidField() {
+		$validator = new Validator\Required([]);
+
+		$this->subject->attachValidator($validator);
+		$this->assertTrue($this->subject->validate());
+	}
+
+	public function testValidateWithInvalidFields() {
+		$validatorValid = new Validator\Required(['message' => 'this error message should never appear']);
+		$validatorFoo = new Validator\AlphaNumeric(['message' => 'foo']);
+		$validatorBar = new Validator\MaxLength(['message' => 'bar', 'max' => 3]);
+
+		$this->subject->attachValidator($validatorValid);
+		$this->subject->attachValidator($validatorFoo);
+		$this->subject->attachValidator($validatorBar);
+
+		$this->subject->validate();
+		$this->assertEquals(['foo', 'bar'], $this->subject->getErrors());
 	}
 }

@@ -17,6 +17,15 @@ abstract class Base extends \PHPUnit_Framework_TestCase {
   public function tearDown() {
     WP::tearDown();
   }
+
+
+  protected function getProtectedProperty($object, $name) {
+    $reflection = new \ReflectionClass($object);
+    $property = $reflection->getProperty($name);
+    $property->setAccessible(true);
+
+    return $property->getValue($object);
+  }
 }
 
 ?>

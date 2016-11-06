@@ -2,11 +2,13 @@
 
 namespace CftTest\TestCase;
 
-require 'lib/Cft/Traits/HasCustomFields.php';
+require_once 'lib/Cft/Traits/HasCustomFields.php';
+require_once 'lib/Cft/ValidatorBuilder.php';
 
-use \WP_Mock as WP;
-use \Cft\Plugin;
-use \Cft\Traits\HasCustomFields;
+use WP_Mock as WP;
+use Cft\Plugin;
+use Cft\Traits\HasCustomFields;
+use Cft\ValidatorBuilder;
 
 class Traits_HasCustomFieldsTest extends Base {
   use \CftTest\Traits\HasMockFields;
@@ -47,13 +49,17 @@ class Traits_HasCustomFieldsTest extends Base {
       'return' => 1
     ]);
 
-    Plugin::getInstance()->set('request', [
+    $plugin = Plugin::getInstance();
+
+    $plugin->set('request', [
       'cft_nonce' => 'nonce value',
       'foo' => 'I am FOO',
       'bar' => 'I am BAR',
       'baz' => 'I am BAZ',
       'qux' => 'I am QUX',
     ]);
+
+    $plugin->set('validatorBuilder', new ValidatorBuilder($plugin));
 
     // Mock Field instances
     $foo = $this->getField( $this->postId, 'foo', 'text', 'I am FOO' );
@@ -70,6 +76,7 @@ class Traits_HasCustomFieldsTest extends Base {
     ];
 
     $builder = $this->getMockBuilder('\Cft\FieldBuilder')
+      ->setConstructorArgs([$plugin])
       ->setMethods(['build'])
       ->getMock();
 

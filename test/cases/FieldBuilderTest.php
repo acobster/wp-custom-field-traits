@@ -3,6 +3,7 @@
 namespace CftTest\TestCase;
 
 require_once 'lib/Cft/FieldBuilder.php';
+require_once 'lib/Cft/ValidatorBuilder.php';
 require_once 'lib/Cft/Field/AbstractBase.php';
 require_once 'lib/Cft/Traits/Field/InMetaBox.php';
 require_once 'lib/Cft/Field/Text.php';
@@ -14,12 +15,17 @@ require_once 'lib/Cft/Field/Url.php';
 require_once 'lib/Cft/Field/Wysiwyg.php';
 
 use \Cft\FieldBuilder;
+use \Cft\ValidatorBuilder;
+use \Cft\Plugin;
 
 class FieldBuilderTest extends Base {
+  protected $plugin;
   protected $builder;
 
   public function setUp() {
-    $this->builder = new FieldBuilder();
+    $this->plugin = Plugin::getInstance();
+    $this->plugin->set('validatorBuilder', new ValidatorBuilder($this->plugin));
+    $this->builder = new FieldBuilder($this->plugin);
   }
 
   public function tearDown() {
@@ -27,10 +33,7 @@ class FieldBuilderTest extends Base {
   }
 
   public function testBuild() {
-    $reflection = new \ReflectionClass($this->builder);
-    $prop = $reflection->getProperty('types');
-    $prop->setAccessible(true);
-    $types = $prop->getValue($this->builder);
+    $types = $this->getProtectedProperty($this->builder, 'types');
 
     foreach( $types as $type => $class ) {
       if ($type === 'select') {
@@ -41,16 +44,21 @@ class FieldBuilderTest extends Base {
       $field = $this->builder->build( 123, 'my_field', $type );
       $this->assertInstanceOf( $class, $field );
     }
+
+    // test with some validators
+    $requiredField = $this->builder->build( 123, 'required_field', [
+      'type' => 'text',
+      'validators' => ['required' => true]
+    ]);
+    $this->assertInstanceOf('\Cft\Field\Text', $requiredField);
+    $this->assertInstanceOf('\Cft\Validator\Required', $requiredField->getValidators()[0]);
   }
 
   public function testRegisterType() {
     $this->builder->registerType('foo', 'Foo');
     $this->builder->registerType('bar', '\Name\Space\Bar');
 
-    $reflection = new \ReflectionClass($this->builder);
-    $prop = $reflection->getProperty('types');
-    $prop->setAccessible(true);
-    $types = $prop->getValue($this->builder);
+    $types = $this->getProtectedProperty($this->builder, 'types');
 
     $this->assertEquals( 'Foo', $types['foo'] );
     $this->assertEquals( '\Name\Space\Bar', $types['bar'] );
