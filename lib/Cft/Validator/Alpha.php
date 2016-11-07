@@ -4,9 +4,9 @@ namespace Cft\Validator;
 
 use Cft\Field\AbstractBase as Field;
 
-class AlphaNumeric extends AbstractBase {
+class Alpha extends AbstractBase {
   public function isValid(Field $field) {
-    return ctype_alnum($field->getValue());
+    return ctype_alpha($field->getValue());
   }
 }
 
