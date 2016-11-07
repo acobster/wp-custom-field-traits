@@ -52,6 +52,7 @@ class FieldBuilderTest extends Base {
     ]);
     $this->assertInstanceOf('\Cft\Field\Text', $requiredField);
     $this->assertInstanceOf('\Cft\Validator\Required', $requiredField->getValidators()[0]);
+    $this->assertEquals(1, count($requiredField->getValidators()));
   }
 
   public function testRegisterType() {

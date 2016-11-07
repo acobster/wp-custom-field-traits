@@ -26,6 +26,14 @@ abstract class Base extends \PHPUnit_Framework_TestCase {
 
     return $property->getValue($object);
   }
+
+  protected function callProtectedMethod($object, $name, $args = []) {
+    $reflection = new \ReflectionClass($object);
+    $method = $reflection->getMethod($name);
+    $method->setAccessible(true);
+
+    return $method->invokeArgs($object, $args);
+  }
 }
 
 ?>
