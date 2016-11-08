@@ -82,7 +82,13 @@ abstract class AbstractBase {
   }
 
   public function save() {
-     return update_post_meta( $this->getPostId(), $this->getName(), $this->getValue() );
+    $this->clearErrors();
+
+    if (!$this->validate()) {
+      return false;
+    }
+
+    return update_post_meta( $this->getPostId(), $this->getName(), $this->getValue() );
   }
 
   public function validate() {
@@ -99,6 +105,10 @@ abstract class AbstractBase {
 
   public function attachValidator(Validator $validator) {
     $this->validators[] = $validator;
+  }
+
+  public function clearErrors() {
+    $this->errors = [];
   }
 
   protected function getHtmlId() {

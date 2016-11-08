@@ -141,7 +141,6 @@ $ ../vendor/bin/wp core install --prompt
 
 ## TODO
 
-2. Implement field validation
 3. Implement fields:
 	* image (with crop option)
 	* file

@@ -82,6 +82,25 @@ class Field_AbstractBaseTest extends Base {
 		$this->assertEquals( $result, 12345 );
 	}
 
+	public function testSaveWithErrors() {
+		$this->subject->setValue('');
+    $validator = new Validator\Required(['message' => 'my_field is required!']);
+		$this->subject->attachValidator($validator);
+
+		$this->assertFalse($this->subject->save());
+    $this->assertEquals(['my_field is required!'], $this->subject->getErrors());
+
+		WP::wpFunction( 'update_post_meta', [
+			'args' => [$this->postId, $this->name, 'foo'],
+			'times' => 1,
+			'return' => 12345
+		]);
+
+    $this->subject->setValue('foo');
+    $this->assertEquals(12345, $this->subject->save());
+    $this->assertEquals([], $this->subject->getErrors());
+	}
+
 
 	public function testGetConfig() {
 		$reflection = new \ReflectionClass('\Cft\Field\AbstractBase');
