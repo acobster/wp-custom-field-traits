@@ -141,6 +141,7 @@ $ ../vendor/bin/wp core install --prompt
 
 ## TODO
 
+2. Documentation
 3. Implement fields:
 	* image (with crop option)
 	* file
