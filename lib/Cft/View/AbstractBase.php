@@ -28,7 +28,7 @@ abstract class AbstractBase {
   abstract public function compile( $template, $data );
 
   /**
-   * Get the internal template engine, e.g. the instance of \Dust\Dust
+   * Get the internal template engine, e.g. the instance of \Twig_Environment
    * @return  object
    */
   public function getEngine() {

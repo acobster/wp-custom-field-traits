@@ -2,8 +2,6 @@
 
 namespace Cft\View;
 
-use \Dust;
-
 class TwigView extends AbstractBase {
   public function render( $file, $data ) {
     return $this->engine->render( $file, $data );
