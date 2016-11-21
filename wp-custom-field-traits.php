@@ -33,7 +33,8 @@ $_cft_plugin_init = function() {
     $plugin->set('request', $_POST);
   }
 
-  $plugin->set('fieldBuilder', new Cft\FieldBuilder());
+  $plugin->set('validatorBuilder', new Cft\ValidatorBuilder($plugin));
+  $plugin->set('fieldBuilder', new Cft\FieldBuilder($plugin));
 
   // where to look for view files
   $plugin->set('viewDirs', [CFT_PLUGIN_DIR . 'views/']);
