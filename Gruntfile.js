@@ -70,6 +70,7 @@ module.exports = function(grunt) {
         dir: 'test/cases/'
       },
       options: {
+        bin: 'vendor/bin/phpunit',
         configuration: 'phpunit.xml'
       }
     },
