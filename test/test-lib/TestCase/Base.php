@@ -10,12 +10,18 @@ use \Cft\Plugin;
  * complain about a lack of tests defined here.
  */
 abstract class Base extends \PHPUnit_Framework_TestCase {
+  protected $plugin;
+
   public function setUp() {
     WP::setUp();
+    $this->plugin = \Cft\Plugin::getInstance();
+    $this->plugin->set('validatorBuilder', new \Cft\ValidatorBuilder($this->plugin));
+    $this->plugin->set('fieldBuilder', new \Cft\FieldBuilder($this->plugin));
   }
 
   public function tearDown() {
     WP::tearDown();
+    unset($this->plugin);
   }
 
 

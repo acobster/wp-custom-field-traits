@@ -5,18 +5,6 @@ namespace CftTest\TestCase;
 use \Cft\Plugin;
 
 class PluginTest extends Base {
-  protected $plugin;
-
-  public function setUp() {
-    parent::setUp();
-    $this->plugin = \Cft\Plugin::getInstance();
-  }
-
-  public function tearDown() {
-    parent::tearDown();
-    unset($this->plugin);
-  }
-
   public function testGetInstance() {
     $plugin1 = Plugin::getInstance();
     $class = get_class( $plugin1 );
