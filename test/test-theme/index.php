@@ -2,7 +2,7 @@
 
 header('Content-Type: application/json');
 
-$id = intval($_GET['id']);
+$id = isset($_GET['id']) ? intval($_GET['id']) : get_the_id();
 
 $post = new Cft\Example\Post($id);
 $post->hydrate();
