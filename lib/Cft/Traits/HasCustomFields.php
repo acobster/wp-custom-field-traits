@@ -33,7 +33,7 @@ trait HasCustomFields {
     $builder = Plugin::getInstance()->get('fieldBuilder');
 
     foreach( $this->getFieldConfigs() as $name => $config ) {
-      $fieldMeta = isset($meta[$name]) ? $meta[$name] : [];
+      $fieldMeta = isset($meta[$name]) ? $meta[$name] : '';
       $field = $builder->build( $this->getPostId(), $name, $config, $fieldMeta );
       $this->cftFields[$name] = $field;
       $this->set( $name, $field->getValue() );
