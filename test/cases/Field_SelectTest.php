@@ -96,7 +96,7 @@ class Field_SelectTest extends Base {
 _SELECT_;
 
     \Cft\Plugin::getInstance()->set('view', function() use($expected) {
-      $twig = $this->getMock('\Twig_Environment');
+      $twig = $this->getMockBuilder('\Twig_Environment')->getMock();
 
       $data           = $this->config;
       $data['name']   = $this->name;
