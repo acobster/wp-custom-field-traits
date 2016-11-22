@@ -88,6 +88,34 @@ class Traits_HasCustomFieldsTest extends Base {
     $instance->save();
   }
 
+  public function testHydrate() {
+    $instance = $this->getInstanceWithTrait([
+      'foo' => 'text',
+      'bar' => ['type' => 'text'],
+      'baz' => 'textarea',
+      'qux' => 'wysiwyg',
+    ]);
+    $instance->foo = null;
+    $instance->bar = null;
+
+    $meta = [
+      'foo' => 'I AM FOOOOO',
+      'bar' => 'I AM BARRRR',
+    ];
+
+    WP::wpFunction( 'get_post_meta', [
+      'args' => [$this->postId],
+      'times' => 1,
+      'return' => $meta
+    ]);
+
+    $instance->hydrate();
+
+    $this->assertEquals('I AM FOOOOO', $instance->get('foo'));
+    $this->assertEquals('I AM BARRRR', $instance->get('bar'));
+    $this->assertEquals('', $instance->get('baz'));
+  }
+
 
   protected function getInstanceWithTrait( $config ) {
     $instance = $this->getMockForTrait('\Cft\Traits\HasCustomFields');
