@@ -7,7 +7,7 @@
     convertWarningsToExceptions="true"
     beStrictAboutTestsThatDoNotTestAnything="true">
     <testsuites>
-        <testsuite>
+        <testsuite name="WP Custom Field Traits test">
             <directory suffix=".php">./test/cases</directory>
         </testsuite>
     </testsuites>

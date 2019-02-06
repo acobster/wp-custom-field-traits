@@ -2,14 +2,14 @@
     "name": "acobster/wp-custom-field-traits",
     "description": "A unique OO approach to custom WordPress fields",
     "require": {
-        "php": ">=5.5",
+        "php": ">=7.1",
         "twig/twig": "~1.0"
     },
     "require-dev": {
         "johnpbloch/wordpress": "~4.4",
         "10up/wp_mock": "*@stable",
         "wp-cli/wp-cli": "~0.22",
-        "phpunit/phpunit": "^5.6"
+        "phpunit/phpunit": "^7"
     },
     "license": "MIT",
     "authors": [
