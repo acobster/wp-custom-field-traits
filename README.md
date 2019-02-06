@@ -1,5 +1,7 @@
 # WP Custom Field Traits
 
+[![Build Status](https://travis-ci.org/acobster/wp-custom-field-traits.svg?branch=master)](https://travis-ci.org/acobster/wp-custom-field-traits)
+
 A unique, object-oriented approach to custom WordPress fields. Heavily inspired by the awesome [Advanced Custom Fields](http://www.advancedcustomfields.com/) plugin.
 
 This plugin is:
